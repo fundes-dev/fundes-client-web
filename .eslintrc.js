@@ -33,7 +33,19 @@ module.exports = {
       "components": [ "Link" ],
       "specialLink": [ "hrefLeft", "hrefRight" ],
       "aspects": [ "preferButton" ]
+      }
+    ],
+    
+  },
+  overrides: [
+    {
+      "files": [
+        "**/*.spec.js",
+        "**/*.spec.jsx"
+      ],
+      "env": {
+        "jest": true
+      }
     }
   ]
-  },
 };
