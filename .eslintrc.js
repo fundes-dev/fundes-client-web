@@ -23,19 +23,21 @@ module.exports = {
   ],
   rules: {
     "react/jsx-filename-extension": [
-      1,{
+      1, {
         extensions: [".js", "jsx"]
       }
     ],
-    "jsx-a11y/anchor-is-valid": [ 
-      "error", 
+    "jsx-a11y/anchor-is-valid": [
+      "error",
       {
-      "components": [ "Link" ],
-      "specialLink": [ "hrefLeft", "hrefRight" ],
-      "aspects": [ "preferButton" ]
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["preferButton"]
       }
     ],
-    
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off"
+
   },
   overrides: [
     {
