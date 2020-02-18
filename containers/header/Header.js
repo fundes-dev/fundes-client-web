@@ -1,6 +1,7 @@
 import { Toolbar, AppBar, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, styled } from '@material-ui/core/styles';
 import Link from '../../components/Link';
+
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -10,11 +11,22 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     marginLeft: 'auto',
+    listStyle: 'none',
   },
   li: {
     marginRight: theme.spacing(3),
   },
 }));
+
+const HeaderLogo = styled(Link)({
+  color: 'white',
+  textDecoration: 'none',
+});
+const HeaderLink = styled(Link)({
+  color: 'white',
+  textDecoration: 'none',
+  fontSize: '16px',
+});
 
 const Header = () => {
   const classes = useStyles();
@@ -23,20 +35,20 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h4">
-          <Link href="/">
+          <HeaderLogo href="/" color="primary">
             Fundes
-          </Link>
+          </HeaderLogo>
         </Typography>
         <ul className={classes.ul}>
           <li className={classes.li}>
-            <Link href="/about">
+            <HeaderLink href="/about">
               About
-            </Link>
+            </HeaderLink>
           </li>
           <li className={classes.li}>
-            <Link href="/my-account">
+            <HeaderLink href="/my-account">
               My Account
-            </Link>
+            </HeaderLink>
           </li>
         </ul>
       </Toolbar>

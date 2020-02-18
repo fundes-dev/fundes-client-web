@@ -6,7 +6,14 @@ import Header from '../containers/header/Header';
 import Footer from '../containers/footer/Footer';
 
 
-const MainLayout = ({ className, children }) => (
+const PageContainer = styled('div')({
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+});
+
+const MainLayout = ({ children }) => (
   <>
     <Head>
       <meta charSet="utf-8" />
@@ -17,27 +24,19 @@ const MainLayout = ({ className, children }) => (
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     </Head>
-    <div className={className}>
+    <PageContainer>
       <Header />
       <CssBaseline />
       <main>
         {children}
       </main>
       <Footer />
-    </div>
+    </PageContainer>
   </>
 );
 
-const StyledMainLayout = styled(MainLayout)`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
 MainLayout.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string.isRequired,
 };
 
-export default StyledMainLayout;
+export default MainLayout;
