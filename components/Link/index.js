@@ -29,7 +29,7 @@ NextComposed.defaultProps = {
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
-function Link(props) {
+const Link = (props) => {
   const {
     href,
     activeClassName = 'active',
@@ -52,7 +52,7 @@ function Link(props) {
   return (
     <MuiLink component={NextComposed} className={className} ref={innerRef} href={href} {...other} />
   );
-}
+};
 
 Link.propTypes = {
   activeClassName: PropTypes.string,
