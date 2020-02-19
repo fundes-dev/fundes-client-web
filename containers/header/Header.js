@@ -1,5 +1,5 @@
-import { Typography } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
+import Typography from '../../components/Typography';
 import AppBar from '../../components/AppBar';
 import Toolbar from '../../components/Toolbar';
 import Link from '../../components/Link';
