@@ -1,18 +1,8 @@
-import styled from 'styled-components';
-import { Container } from '@material-ui/core';
-
-const Hero = styled('div')({
-  height: '85vh',
-  backgroundColor: '#BBB',
-});
+import HeroSearch from '../containers/HeroSearch';
 
 const Home = () => (
   <>
-    <Hero>
-      <Container>
-        <div>Hello</div>
-      </Container>
-    </Hero>
+    <HeroSearch />
   </>
 );
 
