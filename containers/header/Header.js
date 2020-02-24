@@ -15,7 +15,7 @@ const Header = () => (
     <Toolbar>
       <Typography variant="h4">
         <HeaderLogo href="/" color="primary">
-            Fundes
+          Fundes
         </HeaderLogo>
       </Typography>
       <TopNav />
