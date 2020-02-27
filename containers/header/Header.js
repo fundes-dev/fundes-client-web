@@ -3,7 +3,7 @@ import Typography from '../../components/Typography';
 import AppBar from '../../components/AppBar';
 import Toolbar from '../../components/Toolbar';
 import Link from '../../components/Link';
-import TopNav from '../../components/TopNav';
+import TopNav from '../TopNav';
 
 const HeaderLogo = styled(Link)(({ theme }) => ({
   color: theme.palette.primary.main,
