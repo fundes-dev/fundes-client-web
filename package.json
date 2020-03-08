@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "test": "jest --collect-coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .js,.jsx",
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.3",
@@ -27,7 +30,9 @@
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^10.0.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.20.0",
@@ -40,7 +45,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run test"
+      "pre-commit": "lint-staged && npm run test",
+      "pre-push": "npm run test && npm run build"
     }
   },
   "lint-staged": {
