@@ -1,15 +1,36 @@
 import React from 'react';
 import MaterialTextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
 import { styled } from '@material-ui/core/styles';
 
 const StyledTextField = styled(MaterialTextField)({
   maxWidth: '500px',
   minWidth: '300px',
+  margin: '10px 0',
+  width: '100%',
 });
 
 
-const TextField = ({ ...others }) => (
-  <StyledTextField {...others} />
-);
+const TextField = ({
+  field, helperText, form, ...others
+}) => {
+  const fieldName = field && field.name;
+  const errorMessage = form && form.errors[fieldName];
+  const touched = form && form.touched[fieldName];
+  const hasError = touched && !!errorMessage;
+  const helperTextMessage = hasError && errorMessage ? errorMessage : helperText;
+  return (
+    <StyledTextField {...field} error={hasError} helperText={helperTextMessage} {...others} variant="outlined" />
+  );
+};
+
+TextField.propTypes = {
+  field: PropTypes.shape({ name: PropTypes.string }),
+  helperText: PropTypes.string,
+  form: PropTypes.shape({
+    errors: PropTypes.object,
+    touched: PropTypes.object,
+  }),
+};
 
 export default TextField;
