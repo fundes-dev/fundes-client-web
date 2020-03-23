@@ -17,6 +17,7 @@ const List = styled('ul')({
   justifyContent: 'flex-end',
   marginLeft: 'auto',
   listStyle: 'none',
+  alignItems: 'center',
 });
 
 const ListItem = styled('li')(({ theme }) => ({
@@ -29,7 +30,7 @@ const TopNav = ({ isAuthenticated, mockLoginOnClick, mockLogoutOnClick }) => (
     <List>
       <ListItem>
         <StyledLink href="/about">
-              About
+          About
         </StyledLink>
       </ListItem>
       <ListItem>
@@ -39,7 +40,7 @@ const TopNav = ({ isAuthenticated, mockLoginOnClick, mockLogoutOnClick }) => (
           </StyledLink>
         ) : (
           <StyledLink href="/login">
-            Login
+            Sign In
           </StyledLink>
         )}
       </ListItem>

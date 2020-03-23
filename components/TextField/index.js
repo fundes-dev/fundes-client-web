@@ -6,7 +6,7 @@ import { styled } from '@material-ui/core/styles';
 const StyledTextField = styled(MaterialTextField)({
   maxWidth: '500px',
   minWidth: '300px',
-  margin: '10px 0',
+  margin: '8px 0',
   width: '100%',
 });
 
