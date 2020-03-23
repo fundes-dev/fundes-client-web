@@ -7,23 +7,20 @@ import Typography from '../../components/Typography';
 import { Box } from '../../components/Layout';
 
 const StyledButton = styled(Button)({
-  margin: '10px 0 20px',
+  margin: '10px 0',
 });
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .required('Required'),
-  password: Yup.string()
-    .required('Required'),
 });
 
-const LoginForm = () => (
+const PasswordResetForm = () => (
 
   <Formik
     initialValues={{
       email: '',
-      password: '',
     }}
     validationSchema={LoginSchema}
     onSubmit={(values, { setSubmitting }) => {
@@ -36,8 +33,8 @@ const LoginForm = () => (
     {({ submitForm, isSubmitting }) => (
       <Form>
         <Box mb={1}>
-          <Typography variant="h5">Sign In</Typography>
-          <Typography variant="body2">Sign in to your Fundes account.</Typography>
+          <Typography variant="h5">Reset Password</Typography>
+          <Typography variant="body2">Enter your user account&apos;s verified email address and we will send you a password reset link.</Typography>
         </Box>
         <Field
           component={TextField}
@@ -45,19 +42,13 @@ const LoginForm = () => (
           type="email"
           label="Email"
         />
-        <Field
-          component={TextField}
-          name="password"
-          type="password"
-          label="Password"
-        />
         <StyledButton
           variant="contained"
           color="primary"
           disabled={isSubmitting}
           onClick={submitForm}
         >
-          Sign in
+          Reset Password
         </StyledButton>
       </Form>
     )}
@@ -65,4 +56,4 @@ const LoginForm = () => (
 
 );
 
-export default LoginForm;
+export default PasswordResetForm;

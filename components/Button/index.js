@@ -5,7 +5,6 @@ import { styled } from '@material-ui/core/styles';
 
 const StyledButton = styled(MaterialButton)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-
 }));
 
 

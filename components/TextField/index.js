@@ -6,7 +6,7 @@ import { styled } from '@material-ui/core/styles';
 const StyledTextField = styled(MaterialTextField)({
   maxWidth: '500px',
   minWidth: '300px',
-  margin: '10px 0',
+  margin: '8px 0',
   width: '100%',
 });
 
@@ -14,9 +14,9 @@ const StyledTextField = styled(MaterialTextField)({
 const TextField = ({
   field, helperText, form, ...others
 }) => {
-  const fieldName = field && field.name;
-  const errorMessage = form && form.errors[fieldName];
-  const touched = form && form.touched[fieldName];
+  const fieldName = field?.name;
+  const errorMessage = form?.errors[fieldName];
+  const touched = form?.touched[fieldName];
   const hasError = touched && !!errorMessage;
   const helperTextMessage = hasError && errorMessage ? errorMessage : helperText;
   return (
