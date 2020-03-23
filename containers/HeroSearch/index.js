@@ -1,6 +1,6 @@
 import { Formik, Form, Field } from 'formik';
-import { Button } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
+import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 
 const StyledContainer = styled('div')({
@@ -11,11 +11,16 @@ const StyledContainer = styled('div')({
   justifyContent: 'center',
   alignItems: 'center',
 });
+
 const FormContainer = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
-  alignItems: 'flex-end',
+  alignItems: 'center',
   minWidth: '400px',
+});
+
+const StyledButton = styled(Button)({
+  marginLeft: '20px',
 });
 
 const Hero = () => (
@@ -40,14 +45,15 @@ const Hero = () => (
               type="text"
               label="Search for an NPM Package"
             />
-            <Button
+            <StyledButton
               variant="contained"
               color="primary"
               disabled={isSubmitting}
               onClick={submitForm}
+              size="large"
             >
-            Submit
-            </Button>
+              Submit
+            </StyledButton>
           </FormContainer>
         </Form>
       )}

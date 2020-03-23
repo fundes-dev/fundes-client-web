@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import MuiLink from '@material-ui/core/Link';
+import { styled } from '@material-ui/core/styles';
 
 const NextComposed = React.forwardRef((props, ref) => {
   const {
@@ -70,4 +71,9 @@ Link.defaultProps = {
   naked: true,
 };
 
-export default React.forwardRef((props, ref) => <Link {...props} innerRef={ref} />);
+const StyledLink = styled(Link)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  textDecoration: 'none',
+}));
+
+export default React.forwardRef((props, ref) => <StyledLink {...props} innerRef={ref} />);

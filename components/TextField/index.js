@@ -14,9 +14,9 @@ const StyledTextField = styled(MaterialTextField)({
 const TextField = ({
   field, helperText, form, ...others
 }) => {
-  const fieldName = field && field.name;
-  const errorMessage = form && form.errors[fieldName];
-  const touched = form && form.touched[fieldName];
+  const fieldName = field?.name;
+  const errorMessage = form?.errors[fieldName];
+  const touched = form?.touched[fieldName];
   const hasError = touched && !!errorMessage;
   const helperTextMessage = hasError && errorMessage ? errorMessage : helperText;
   return (
