@@ -1,10 +1,13 @@
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { styled } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 import Typography from '../../components/Typography';
 import { Box } from '../../components/Layout';
+import { registrationRequested } from '../../store/actions/registration';
 
 const StyledButton = styled(Button)({
   margin: '8px 0 16px',
@@ -25,8 +28,7 @@ const RegisterSchema = Yup.object().shape({
     .required('Required'),
 });
 
-const RegisterForm = () => (
-
+const RegisterForm = ({ onSubmit, isFetching, errorMessage }) => (
   <Formik
     initialValues={{
       firstName: '',
@@ -36,15 +38,12 @@ const RegisterForm = () => (
       confirmPassword: '',
     }}
     validationSchema={RegisterSchema}
-    onSubmit={(values, { setSubmitting }) => {
-      setTimeout(() => {
-        setSubmitting(false);
-        alert(JSON.stringify(values, null, 2));
-      }, 500);
+    onSubmit={(values) => {
+      onSubmit(values);
     }}
     validateOnBlur
   >
-    {({ submitForm, isSubmitting }) => (
+    {({ submitForm }) => (
       <Form>
         <Box mb={1}>
           <Typography variant="h5">Register Now</Typography>
@@ -83,7 +82,7 @@ const RegisterForm = () => (
         <StyledButton
           variant="contained"
           color="primary"
-          disabled={isSubmitting}
+          disabled={isFetching}
           onClick={submitForm}
         >
           Register
@@ -91,7 +90,21 @@ const RegisterForm = () => (
       </Form>
     )}
   </Formik>
-
 );
+RegisterForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string.isRequired,
 
-export default RegisterForm;
+};
+
+const mapStateToProps = (state) => ({
+  isFetching: state.registration.isFetching,
+  errorMessage: state.registration.isFetching,
+});
+
+const mapDispatchToProps = ({
+  onSubmit: registrationRequested,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
