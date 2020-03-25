@@ -1,13 +1,12 @@
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { styled } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import Router from 'next/router';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 import Typography from '../../components/Typography';
 import { Box } from '../../components/Layout';
-import { registrationRequested } from '../../store/actions/registration';
+import { requestRegistration } from '../../services';
 
 const StyledButton = styled(Button)({
   margin: '8px 0 16px',
@@ -28,7 +27,8 @@ const RegisterSchema = Yup.object().shape({
     .required('Required'),
 });
 
-const RegisterForm = ({ onSubmit, isFetching, errorMessage }) => (
+
+const RegisterForm = () => (
   <Formik
     initialValues={{
       firstName: '',
@@ -38,12 +38,25 @@ const RegisterForm = ({ onSubmit, isFetching, errorMessage }) => (
       confirmPassword: '',
     }}
     validationSchema={RegisterSchema}
-    onSubmit={(values) => {
-      onSubmit(values);
+    onSubmit={async (values, { setErrors, setSubmitting }) => {
+      const {
+        email, password, firstName, lastName,
+      } = values;
+      try {
+        const res = await requestRegistration(email, password, firstName, lastName);
+        if (res.user) {
+          Router.push('/login');
+        } else {
+          setErrors({ email: res.message });
+        }
+        setSubmitting(false);
+      } catch (e) {
+        setSubmitting(false);
+      }
     }}
     validateOnBlur
   >
-    {({ submitForm }) => (
+    {({ submitForm, isSubmitting }) => (
       <Form>
         <Box mb={1}>
           <Typography variant="h5">Register Now</Typography>
@@ -82,7 +95,7 @@ const RegisterForm = ({ onSubmit, isFetching, errorMessage }) => (
         <StyledButton
           variant="contained"
           color="primary"
-          disabled={isFetching}
+          disabled={isSubmitting}
           onClick={submitForm}
         >
           Register
@@ -91,20 +104,6 @@ const RegisterForm = ({ onSubmit, isFetching, errorMessage }) => (
     )}
   </Formik>
 );
-RegisterForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string.isRequired,
 
-};
 
-const mapStateToProps = (state) => ({
-  isFetching: state.registration.isFetching,
-  errorMessage: state.registration.isFetching,
-});
-
-const mapDispatchToProps = ({
-  onSubmit: registrationRequested,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+export default RegisterForm;

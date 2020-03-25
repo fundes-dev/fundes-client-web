@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
 import { LOGOUT_SUCCEEDED } from '../actions/user';
 import user from './user';
-import registration from './registration';
 
 
 const appReducer = combineReducers({
   user,
-  registration,
 });
 
 const rootReducer = (state, action) => {
