@@ -51,6 +51,7 @@ const RegisterForm = () => (
         }
         setSubmitting(false);
       } catch (e) {
+        console.log(e);
         setSubmitting(false);
       }
     }}
