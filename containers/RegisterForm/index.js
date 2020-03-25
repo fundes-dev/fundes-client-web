@@ -1,10 +1,12 @@
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { styled } from '@material-ui/core/styles';
+import Router from 'next/router';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 import Typography from '../../components/Typography';
 import { Box } from '../../components/Layout';
+import { requestRegistration } from '../../services';
 
 const StyledButton = styled(Button)({
   margin: '8px 0 16px',
@@ -25,8 +27,8 @@ const RegisterSchema = Yup.object().shape({
     .required('Required'),
 });
 
-const RegisterForm = () => (
 
+const RegisterForm = () => (
   <Formik
     initialValues={{
       firstName: '',
@@ -36,11 +38,21 @@ const RegisterForm = () => (
       confirmPassword: '',
     }}
     validationSchema={RegisterSchema}
-    onSubmit={(values, { setSubmitting }) => {
-      setTimeout(() => {
+    onSubmit={async (values, { setErrors, setSubmitting }) => {
+      const {
+        email, password, firstName, lastName,
+      } = values;
+      try {
+        const res = await requestRegistration(email, password, firstName, lastName);
+        if (res.user) {
+          Router.push('/login');
+        } else {
+          setErrors({ email: res.message });
+        }
         setSubmitting(false);
-        alert(JSON.stringify(values, null, 2));
-      }, 500);
+      } catch (e) {
+        setSubmitting(false);
+      }
     }}
     validateOnBlur
   >
@@ -91,7 +103,7 @@ const RegisterForm = () => (
       </Form>
     )}
   </Formik>
-
 );
+
 
 export default RegisterForm;
