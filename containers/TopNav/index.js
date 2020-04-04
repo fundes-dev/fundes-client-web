@@ -22,6 +22,9 @@ const List = styled('ul')({
 
 const ListItem = styled('li')(({ theme }) => ({
   marginRight: theme.spacing(3),
+  '&:last-of-type': {
+    marginRight: 0,
+  },
 }));
 
 
