@@ -10,6 +10,7 @@ const PageContainer = styled('div')({
   minHeight: '100vh',
   display: 'flex',
   flexDirection: 'column',
+  position: 'relative',
 });
 
 const MainLayout = ({ children }) => (
