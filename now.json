@@ -1,0 +1,8 @@
+{
+  "build":{
+    "env": {
+      "APP_ENV": "@app-env",
+      "API_HOST": "@api-host"
+    }
+  }  
+}
