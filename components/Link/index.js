@@ -76,4 +76,9 @@ const StyledLink = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
 }));
 
+export const ExternalLink = styled(MuiLink)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  textDecoration: 'none',
+}));
+
 export default React.forwardRef((props, ref) => <StyledLink {...props} innerRef={ref} />);

@@ -12,7 +12,7 @@ const StyledTextField = styled(MaterialTextField)({
 
 
 const TextField = ({
-  field, helperText, form, ...others
+  field, helperText, form, error, ...others
 }) => {
   const fieldName = field?.name;
   const errorMessage = form?.errors[fieldName];
@@ -20,7 +20,7 @@ const TextField = ({
   const hasError = touched && !!errorMessage;
   const helperTextMessage = hasError && errorMessage ? errorMessage : helperText;
   return (
-    <StyledTextField {...field} error={hasError} helperText={helperTextMessage} {...others} variant="outlined" />
+    <StyledTextField {...field} error={error || hasError} helperText={helperTextMessage} {...others} variant="outlined" />
   );
 };
 
@@ -31,6 +31,7 @@ TextField.propTypes = {
     errors: PropTypes.object,
     touched: PropTypes.object,
   }),
+  error: PropTypes.bool,
 };
 
 export default TextField;
