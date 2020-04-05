@@ -44,7 +44,7 @@ const RegisterForm = () => (
       } = values;
       try {
         const res = await requestRegistration(email, password, firstName, lastName);
-        if (res.user) {
+        if (res.body.user) {
           Router.push('/login');
         } else {
           setErrors({ email: res.message });

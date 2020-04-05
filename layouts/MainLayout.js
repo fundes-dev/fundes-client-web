@@ -13,6 +13,11 @@ const PageContainer = styled('div')({
   position: 'relative',
 });
 
+const MainContent = styled('main')({
+  flex: 1,
+  display: 'flex',
+});
+
 const MainLayout = ({ children }) => (
   <>
     <Head>
@@ -27,9 +32,9 @@ const MainLayout = ({ children }) => (
     <PageContainer>
       <Header />
       <CssBaseline />
-      <main>
+      <MainContent>
         {children}
-      </main>
+      </MainContent>
       <Footer />
     </PageContainer>
   </>
