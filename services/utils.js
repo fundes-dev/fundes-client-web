@@ -10,7 +10,7 @@ const postData = async (endpoint, payLoad) => {
     body: JSON.stringify(payLoad),
   });
   const response = await rawResponse.json();
-  return response;
+  return { status: rawResponse.status, body: response };
 };
 
 const fetchData = async (endpoint) => {
@@ -22,7 +22,7 @@ const fetchData = async (endpoint) => {
     },
   });
   const response = await rawResponse.json();
-  return response;
+  return { status: rawResponse.status, body: response };
 };
 
 export { postData, fetchData };

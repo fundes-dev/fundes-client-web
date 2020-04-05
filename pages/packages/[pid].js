@@ -31,10 +31,12 @@ const WebsiteIcon = styled(LanguageIcon)({
   marginBottom: '3px',
 });
 
-const Packages = ({ packageInfo }) => {
+const Packages = ({ packageInfo, err }) => {
+  if (err) {
+    return <h1>Package Not Found</h1>;
+  }
   const { name, description, homePage } = packageInfo;
   const cleanUrl = new URL(homePage).host;
-
   return (
     <ContentWithSidebar sidebar={(
       <Card>
@@ -48,7 +50,6 @@ const Packages = ({ packageInfo }) => {
             color="primary"
           >
             Donate
-
           </Button>
         </CardContent>
       </Card>
@@ -102,13 +103,30 @@ const Packages = ({ packageInfo }) => {
   );
 };
 
-Packages.getInitialProps = async (context) => {
-  const { pid } = context.query;
-  const res = await requestPackage(pid);
-  return {
-    packageInfo: res?.npmPackage,
-  };
-};
+export async function getServerSideProps(context) {
+  const { pid } = context.params;
+  try {
+    const res = await requestPackage(pid);
+    console.log(res);
+    if (res.status === 404) {
+      return {
+        props: {
+          err: 404,
+        },
+      };
+    }
+    return {
+      props: {
+        err: null,
+        packageInfo: res?.body.npmPackage,
+      },
+    };
+  } catch (e) {
+    console.log(e);
+    return { props: { err: 404 } };
+    // TODO figure out error handling
+  }
+}
 
 Packages.propTypes = {
   packageInfo: PropTypes.shape({
@@ -116,6 +134,7 @@ Packages.propTypes = {
     description: PropTypes.string,
     homePage: PropTypes.string,
   }),
+  err: PropTypes.number,
 };
 
 export default Packages;

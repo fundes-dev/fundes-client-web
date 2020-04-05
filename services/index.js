@@ -11,3 +11,5 @@ export const requestRegistration = (email, password, firstName, lastName) => {
 };
 
 export const requestPackage = (name) => fetchData(`${API_HOST}/api/package?name=${name}`);
+
+export const requestPackageSuggestions = (string) => fetchData(`https://api.npms.io/v2/search/suggestions?q=${string}`);
